@@ -1,0 +1,21 @@
+name: Verify artifacts
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check published artifact set
+        shell: bash
+        run: |
+          test -s data/Hana_Decision_Intelligence_Tableau_Mart_v3_KR.xlsx
+          test -s dashboard/hana_crossborder_strategy.twb
+          test -s dashboard/hana_crossborder_strategy.twbx
+          test -s presentation/hana_crossborder_strategy_overview.pptx
+          test -s docs/data_sources.md
+          test -s docs/methodology.md
+          test -s docs/publish_checklist.md
